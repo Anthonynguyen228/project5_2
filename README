@@ -1,0 +1,46 @@
+#Project 5: Resource Management
+
+
+Name:		Anthony Nguyen
+Section: 	CMPSCI 4760 - Operating System
+Date: 		04/10/2022
+
+##Files
+	oss.c - the main program
+	user_proc.c - the application program
+	oss.h - header file containing data structures used in this project
+	config.h - header file containing constants
+	makefile
+
+## How to run the program
+	> make
+	> ./oss
+
+	after all print out the new file output name output.txt
+
+## Remove all executables and object files
+	make clean
+
+## Central Data Structure
+	Semaphore: used to enable mutual exclusion
+	Timeval: used to stimulate a clock
+	Shared Memory: contains the information about the clock and process control block, descriptor of the resources
+
+## Description
+	oss.c:
+		> oss.c will stimulate a resource management module for a operating system using the deadlock detection and recovery strategy to manage resources.  
+		> Initially, program will create descriptors for 20 resources, out of which about 20% should be sharable resources.  Assign a number between 1 and
+10 (inclusive) for the initial instances in each resource class
+		> oss.c will keep executing a loop if it is still alive. In each iteration, oss.c check if it is time to fork a new process. Then oss.c check the shared memory to see if there is any requests from the child. If they are asking for resources. oss.c makes a decision based on the received requests whether the resources should be allocated to processes or not. It does so by running the deadlock avoidance algorithm. If there is no deadlock, the request is granted and the system data is updated. Otherwise, the process is put in a waiting queue waiting for that resource. If they are releasing their resources, oss.c also updates it data as well and might give it to a waitting process.
+		> After the resources have been set up, fork a user process at random times	
+
+	user_proc.c:
+		> user_proc.c is used to simulate the child process. 
+		> It will keep executing a loop to negotiate with oss.c to get access to a resource. 
+		
+		> Upon receving terminate signal from oss.c, user_proc.c will try to return every resources it is currently holding and terminate. 
+	
+
+	Output.txt:
+	Please Check the Print out the name output.txt with all the process and report.
+
